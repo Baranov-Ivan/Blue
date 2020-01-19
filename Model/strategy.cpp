@@ -21,7 +21,7 @@ void Strategy::Moving(Map1 &map, Player &player)
     CalculateArmorTrain(map, player);
     for(int i = 0; i < player.getPlayerTrains().size(); i++)
     {
-        if(player.getPlayerTrains()[i].line_idx != player.getPlayerData().home_line_idx && player.getPlayerTrains()[i].route.isEmpty())
+        if(player.getPlayerTrains()[i].route.isEmpty() && player.getPlayerTrains()[i].iter != 1)
         {
             QVector <int> empty(0);
             QVector <int> route = alg.manipPaths(player.getPlayerTrains()[i].postsRoute.last(), player.getPlayerData().home_idx, empty,empty);
@@ -400,6 +400,7 @@ void Strategy::Upgrade(Map1 &map, Player &player)
                         break;
                 }
             }
+            if(!upgradeTrains.isEmpty())
             service->SendUpgradeMessage(false, upgradeTrains, player.getPlayerData().home_idx);
         }
         for(int i = 0; i < upgradeTrains.size(); i++)

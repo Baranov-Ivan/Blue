@@ -3,6 +3,7 @@
 
 void Map0::Pars(QJsonDocument doc)
 {
+    qDebug() << doc;
     QJsonObject jsonObject = doc.object();
     QJsonArray jsonArray = jsonObject["points"].toArray();
     foreach(const QJsonValue & value, jsonArray)

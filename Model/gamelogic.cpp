@@ -168,7 +168,7 @@ void GameLogic::trainOneStep(train Train) {
                         qDebug() << Train.position;
                         Train.route.clear();
                         this->player.setRoute(Train.idx, Train.route);
-
+                        this->player.setWaitIteration(Train.idx, 0);
                         this->strategy->Moving(this->layer1, this->player);
                         Train.iter = 1;
                         this->player.setTrainIter(Train.idx,Train.iter);
