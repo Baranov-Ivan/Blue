@@ -39,8 +39,6 @@ private:
     game Game;
 signals:
     void Refresh();
-
-
 };
 
 #endif // MAINWINDOWFORENTEREXISTINGGAME_H

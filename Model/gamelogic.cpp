@@ -67,6 +67,7 @@ void GameLogic::trainOneStep(train Train) {
         }
 
         curRoute = Train.route;
+        qDebug() << "ROUTE " << Train.route;
         if(!Train.route.isEmpty()) {
             int sourceEdgePoint = curRoute[Train.iter - 1];
             int destEdgePoint = curRoute[Train.iter];
@@ -116,11 +117,9 @@ void GameLogic::trainOneStep(train Train) {
                 if((curLengh - destDiff) == curLengh) {
                     Train.position++;
                     this->player.setTrainPosition(Train);
-                    //this->player.getTrain(Train.idx).imageTrain->advancePosition(edgeVec[curEdge],curLengh,curSpeed,Train.position,this->animTimer);
                 } else if((curLengh - destDiff) == 0){
                     Train.position--;
                     this->player.setTrainPosition(Train);
-                    //this->player.getTrain(Train.idx).imageTrain->advancePosition(edgeVec[curEdge],curLengh,curSpeed,Train.position,this->animTimer);
                 }
             } else {
 // Разбор стыка рёбер. Не оч красиво, но работает.
@@ -165,13 +164,16 @@ void GameLogic::trainOneStep(train Train) {
                         this->player.setRoute(Train.idx, Train.route);
                         this->player.setPostsRoute(Train.idx, Train.postsRoute);
 
-                    } else if(!Train.killer){
-                        std::reverse(curRoute.begin(),curRoute.end());
-                        player.setRoute(Train.idx,curRoute);
+                    } else if (curRoute[Train.iter] == Train.route.last()) {
+                        qDebug() << Train.position;
+                        Train.route.clear();
+                        this->player.setRoute(Train.idx, Train.route);
+
+                        this->strategy->Moving(this->layer1, this->player);
                         Train.iter = 1;
                         this->player.setTrainIter(Train.idx,Train.iter);
                         this->player.setTrainPosition(Train);
-                        Train.route = curRoute;
+                        Train.route = player.getTrain(Train.idx).route;
                         trainOneStep(Train);
                     }
                 }
@@ -189,7 +191,6 @@ void GameLogic::trainsOneStep()
 
     if(this->layer1.checkForGameOver(this->player.getPlayerIdx())) {
         qDebug() << "GAME OVER";
-        //return;
     }
 
     this->animTimer = new QTimeLine(200);
@@ -208,9 +209,8 @@ void GameLogic::trainsOneStep()
     service->SendTurnMessage();
 }
 
-void GameLogic::animEnemyTrains() {
-   //QVector<train> enemyTrains = this->layer1.getAllEnemiesTrains(this->player.getPlayerIdx());
-
+void GameLogic::animEnemyTrains()
+{
    for(int i = 0; i < this->player.getEnemies().size(); i++)
    {
         for(int j = 0; j < this->player.getEnemies()[i].trains.size(); j++)

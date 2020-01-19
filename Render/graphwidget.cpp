@@ -64,8 +64,6 @@
 #include <QThread>
 
 //! [0]
-/*GraphWidget::GraphWidget(QWidget *parent,SocketTest &socket,MainWindow *window,QString loginText, QString gameName, int numberOfPlayers, int numberOfTurns)
-    : QGraphicsView(parent), timerId(0), timerId_1(1)*/
 GraphWidget::GraphWidget(QWidget *parent, MainWindow *window, Player &player, Map0 layer0, Map1 layer1, Map10 layer10):QGraphicsView(parent),timerId_1(1)
 {
     this->scene = new QGraphicsScene(this);
@@ -88,7 +86,7 @@ void GraphWidget::Render()
     setViewportUpdateMode(BoundingRectViewportUpdate);
     setRenderHint(QPainter::Antialiasing);
     setTransformationAnchor(AnchorUnderMouse);
-    //scale(qreal(0.6), qreal(0.6));
+    scale(qreal(0.6), qreal(0.6));
     setMinimumSize(800, 600);
     setWindowTitle(tr("Train Simulator 2020"));
 
@@ -108,7 +106,6 @@ void GraphWidget::Render()
     enemyTrain.load(":/resources/Pictures/train_enemy.png");
     enemyTown.load(":/resources/Pictures/town_enemy.png");
     ghostTown.load(":/resources/Pictures/town_ghost.png");
-
     scene->setSceneRect(0, 0, layer10.getSizeX(), layer10.getSizeY());
     Node* homeTown;
 
@@ -173,7 +170,6 @@ void GraphWidget::Render()
             Table_sym[j][i] = abs(Table[i][j]);
         }
     }
-
     //shuffle();
     setParentWindow(parent);
 

@@ -61,7 +61,6 @@ class GraphWidget : public QGraphicsView
     Q_OBJECT
 
 public:
-    //GraphWidget(QWidget *parent,SocketTest &socket,MainWindow *window,QString loginText, QString gameName = "", int numberOfPlayers = 0, int numberOfTurns = 0);
     GraphWidget(QWidget *parent, MainWindow * window, Player &player, Map0 layer0, Map1 layer1, Map10 layer10);
     void itemMoved();
     void setParentWindow(MainWindow *window);

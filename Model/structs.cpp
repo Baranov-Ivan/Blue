@@ -220,12 +220,12 @@ void Player::Pars(QJsonDocument doc) {
         Train.goods_capacity = obj["goods_capacity"].toInt();
         Train.goods_type = static_cast<GoodsType>(obj["goods_type"].toInt());
         Train.line_idx = obj["line_idx"].toInt();
+        this->playerData.home_line_idx = Train.line_idx;
         Train.position = obj["position"].toInt();
         Train.speed = obj["speed"].toInt();
         Train.level = obj["level"].toInt();
         Train.price = obj["next_level_price"].toInt();
         Train.waitIteration = 0;
-        Train.killer = false;
         this->playerTrains.append(Train);
     }
 }
@@ -526,11 +526,6 @@ QPair <int, int> Map0::getPoints(int line_idx)
                 return qMakePair(i, j);
         }
     }
-}
-
-void Player::setKiller(train Train, bool IsKiller)
-{
-    playerTrains[this->playerTrains.indexOf(Train)].killer = IsKiller;
 }
 
 QString Player::getPlayerIdx() {

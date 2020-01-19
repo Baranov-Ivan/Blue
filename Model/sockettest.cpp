@@ -111,11 +111,11 @@ void SocketTest::sendMoveMessage(int line_idx,int speed, int train_idx) {
     moveObj.insert("speed",QJsonValue::fromVariant(speed));
     moveObj.insert("train_idx",QJsonValue::fromVariant(train_idx));
 
-    SocketTest::SendMessageWOW(MOVE,moveObj);
+    SendMessageWOW(MOVE,moveObj);
 }
 
 void SocketTest::sendTurnMessage() {
-    SocketTest::SendMessageWOW(TURN,{});
+    SendMessageWOW(TURN,{});
     /*if(this->socket->isOpen())
     {
         this->socket->write(toMessageFormat(TURN,{}));

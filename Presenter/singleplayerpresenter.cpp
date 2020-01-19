@@ -38,7 +38,6 @@ void SinglePlayerPresenter::BackPush()
 {
     AskSelect *window = new AskSelect();
 }
-
 void SinglePlayerPresenter::StartStarter(QVector<Edge *> edgeVec, Player& player)
 {
     this->player = player;

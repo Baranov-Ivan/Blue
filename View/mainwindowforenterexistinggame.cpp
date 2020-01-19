@@ -10,7 +10,6 @@ MainWindowForEnterExistingGame::MainWindowForEnterExistingGame(QWidget *parent) 
     ui->setupUi(this);
     presenter->AskExistingGames();
     this->show();
-
 }
 
 MainWindowForEnterExistingGame::~MainWindowForEnterExistingGame()

@@ -38,12 +38,10 @@ void CreateMultiplayerPresenter::BackPush()
 {
     AskSelect *window = new AskSelect();
 }
-
 void CreateMultiplayerPresenter::StartStarter(QVector<Edge *> edgeVec, Player& player)
 {
     this->player = player;
     starter = new Starter(service, parent->getGame(), player, layer0, edgeVec);
-    connect(&*(starter),SIGNAL(Update(town )),&*(widget),SLOT(Update(town )));
     connect(&*(starter),SIGNAL(SetEnemyTrains(enemy, Player&)),&*(widget),SLOT(SetEnemyTrains(enemy, Player&)));
     starter->CheckAndStart();
 }

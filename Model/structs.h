@@ -39,6 +39,7 @@ struct player
     int home_idx;
     int home_post_idx;
     QString player_idx;
+    int home_line_idx;
     bool operator==(player &anotherPlayer);
 };
 
@@ -62,7 +63,6 @@ struct train
     int waitIteration;
     int iter = 1;
     Train* imageTrain;
-    bool killer;
     bool operator==(const train &anotherTrain);
 };
 
