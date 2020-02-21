@@ -62,13 +62,13 @@ void SocketTest::readyRead()
     code >> int_code;
     this->code = static_cast<Result>(int_code);
 
-    qDebug() << resultCode;
+  //  qDebug() << resultCode;
     Data = data;
     while(Data.size() < int_sizeOfData) {
         if(socket->waitForReadyRead(5000)) //было 900
             Data.append(socket->readAll());
     }
-    qDebug() << Data;
+//    qDebug() << Data;
     doc = QJsonDocument::fromJson(Data, &docError);
     //code = QJsonA::fromJson(resultCode, &codeError);
 }
@@ -93,7 +93,7 @@ QByteArray SocketTest::toMessageFormat(Actions Action,QJsonObject jsonObj) {
     QByteArray bytes_action((char*)action,4);
     QByteArray bytes_jsonSize((char*)jsonSize,4);
     QByteArray bytes_zeroSize((char*)zero_size,4);
-    qDebug() << jsonData;
+//    qDebug() << jsonData;
     if(int_jsonSize > 4)
         return bytes_action + bytes_jsonSize + jsonData;
     else

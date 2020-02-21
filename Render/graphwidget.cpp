@@ -86,7 +86,7 @@ void GraphWidget::Render()
     setViewportUpdateMode(BoundingRectViewportUpdate);
     setRenderHint(QPainter::Antialiasing);
     setTransformationAnchor(AnchorUnderMouse);
-    scale(qreal(0.6), qreal(0.6));
+    scale(qreal(2.9), qreal(2.9));
     setMinimumSize(800, 600);
     setWindowTitle(tr("Train Simulator 2020"));
 

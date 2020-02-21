@@ -527,6 +527,7 @@ QPair <int, int> Map0::getPoints(int line_idx)
                 return qMakePair(i, j);
         }
     }
+    return qMakePair(0,0);
 }
 
 QString Player::getPlayerIdx() {

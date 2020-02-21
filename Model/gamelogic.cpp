@@ -1,6 +1,7 @@
 #include "gamelogic.h"
 #include <QTime>
 #include "strategy.h"
+
 GameLogic::GameLogic(ISocketService *service, QVector<Edge *> &edgeVec,Map0 &Layer0, Map1 &Layer1,Player &player)
 {
     this->layer0 = Layer0;
@@ -17,6 +18,7 @@ GameLogic::GameLogic(ISocketService *service, QVector<Edge *> &edgeVec,Map0 &Lay
     this->home_line = player.getPlayerTrains()[0].line_idx;
     this->home_position = player.getPlayerTrains()[0].position;
     //this->animTimer = new QTimeLine(500);
+    tickTimer = 0;
 }
 
 void GameLogic::Alhoritm()
@@ -88,13 +90,19 @@ void GameLogic::trainOneStep(train Train) {
             int curLengh = Table[std::min(sourceEdgePoint, destEdgePoint)][std::max(sourceEdgePoint, destEdgePoint)];
             if(Train.iter == 1 && Train.line_idx != curEdgeIdx) {
                 Train.line_idx = curEdgeIdx;
-                if(sourceEdgePoint < destEdgePoint) {
+                if((sourceEdgePoint < destEdgePoint) && (curEdgeInfo > 0)){
                     Train.position = 0;
                 }
-                if(sourceEdgePoint > destEdgePoint) {
+                if((sourceEdgePoint > destEdgePoint) && (curEdgeInfo > 0)){
                     Train.position = curLengh;
                 }
-            } else if(Train.line_idx != curEdgeIdx) {
+                if((sourceEdgePoint < destEdgePoint) && (curEdgeInfo < 0)){
+                    Train.position = curLengh;
+                }
+                if((sourceEdgePoint > destEdgePoint) && (curEdgeInfo < 0)){
+                    Train.position = 0;
+                }
+            } else if(Train.line_idx != curEdgeIdx){
                 Train.line_idx = curEdgeIdx;
             }
 
@@ -207,6 +215,10 @@ void GameLogic::trainsOneStep()
     }
     this->animTimer->start();
     service->SendTurnMessage();
+    tickTimer++;
+    qDebug() << tickTimer;
+    if(tickTimer == 1000)
+        return;
 }
 
 void GameLogic::animEnemyTrains()

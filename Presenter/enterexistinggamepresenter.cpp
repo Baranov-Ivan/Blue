@@ -43,6 +43,7 @@ void EnterExistingGamePresenter::StartStarter(QVector<Edge *> edgeVec, Player& p
     this->player = player;
     starter = new Starter(service, parent->getGame(), player, layer0, edgeVec);
     connect(&*(starter),SIGNAL(SetEnemyTrains(enemy, Player&)),&*(widget),SLOT(SetEnemyTrains(enemy, Player&)));
+    connect(&*(starter),SIGNAL(Update(town )),&*(widget),SLOT(Update(town )));
     starter->CheckAndStart();
 }
 

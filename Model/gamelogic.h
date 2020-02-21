@@ -45,6 +45,7 @@ private:
       QTimeLine *animTimer;
       int home_line;
       int home_position;
+      int tickTimer;
       //int destDiff;
 };
 #endif // GAMELOGIC_H

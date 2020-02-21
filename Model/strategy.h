@@ -25,8 +25,7 @@ public:
     int CalculateLengthOfRoute(QVector <int> route);
     void Upgrade(Map1 &map, Player &player);
     void CalculateArmorTrain(Map1 &map, Player &player);
-    void KillEnemy(Map1 &map, Player &player, train Train);
-    void CalculateEnemy(Map1 map, train Train, bool isMarket, Player &player);
+    bool CanIGo(Player &player, int idx, train Train, train anotherTrain);
 };
 
 #endif // STRATEGY_H
